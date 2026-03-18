@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ЖК Домовой</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2E7D32">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ЖК Домовой">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-building"></i>
+                <span>ЖК Домовой</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" data-section="chat">
+                    <i class="fas fa-comments"></i>
+                    <span>Чат с УК</span>
+                    <span class="badge" id="chat-badge">3</span>
+                </a>
+                <a href="#" class="nav-item" data-section="bills">
+                    <i class="fas fa-receipt"></i>
+                    <span>Счета</span>
+                </a>
+                <a href="#" class="nav-item" data-section="passes">
+                    <i class="fas fa-id-card"></i>
+                    <span>Пропуски</span>
+                </a>
+                <a href="#" class="nav-item" data-section="masters">
+                    <i class="fas fa-tools"></i>
+                    <span>Вызов мастера</span>
+                </a>
+                <a href="#" class="nav-item" data-section="profile">
+                    <i class="fas fa-user"></i>
+                    <span>Профиль</span>
+                </a>
+            </nav>
+            <div class="user-info">
+                <div class="avatar" id="user-avatar">АВ</div>
+                <div class="user-details">
+                    <span class="user-name" id="user-name">Алексей</span>
+                    <span class="user-apart" id="user-apart">Квартира 142, корп. 3</span>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <section class="section active" id="chat-section">
+                <div class="section-header">
+                    <h1>Чат с УК</h1>
+                    <span class="status online">УК онлайн</span>
+                </div>
+                <div class="chat-container">
+                    <div class="chat-messages" id="chat-messages"></div>
+                    <div class="chat-input">
+                        <input type="text" id="message-input" placeholder="Введите сообщение...">
+                        <button id="send-message"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="bills-section">
+                <div class="section-header">
+                    <h1>Счета</h1>
+                </div>
+                <div class="bills-grid"></div>
+                <div class="payment-history">
+                    <h2>История платежей</h2>
+                    <table class="history-table">
+                        <thead><tr><th>Дата</th><th>Период</th><th>Сумма</th><th>Статус</th></tr></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="section" id="passes-section">
+                <div class="section-header">
+                    <h1>Пропуска</h1>
+                    <button class="btn-primary" onclick="openPassModal()">
+                        <i class="fas fa-plus"></i> Заказать
+                    </button>
+                </div>
+                <div class="passes-grid"></div>
+                <div class="active-passes"></div>
+            </section>
+
+            <section class="section" id="masters-section">
+                <div class="section-header">
+                    <h1>Вызов мастера</h1>
+                </div>
+                <div class="masters-categories">
+                    <div class="master-category" onclick="selectMaster('plumber')">
+                        <div class="category-icon"><i class="fas fa-faucet"></i></div>
+                        <h3>Сантехник</h3>
+                        <p>Протечки, засоры</p>
+                    </div>
+                    <div class="master-category" onclick="selectMaster('electrician')">
+                        <div class="category-icon"><i class="fas fa-bolt"></i></div>
+                        <h3>Электрик</h3>
+                        <p>Проводка, розетки</p>
+                    </div>
+                    <div class="master-category" onclick="selectMaster('locksmith')">
+                        <div class="category-icon"><i class="fas fa-key"></i></div>
+                        <h3>Слесарь</h3>
+                        <p>Замки, двери</p>
+                    </div>
+                    <div class="master-category" onclick="selectMaster('cleaner')">
+                        <div class="category-icon"><i class="fas fa-broom"></i></div>
+                        <h3>Клининг</h3>
+                        <p>Уборка, окна</p>
+                    </div>
+                    <div class="master-category" onclick="selectMaster('conditioner')">
+                        <div class="category-icon"><i class="fas fa-wind"></i></div>
+                        <h3>Кондиционер</h3>
+                        <p>Установка, чистка</p>
+                    </div>
+                    <div class="master-category" onclick="selectMaster('glass')">
+                        <div class="category-icon"><i class="fas fa-window-maximize"></i></div>
+                        <h3>Окна</h3>
+                        <p>Ремонт, замена</p>
+                    </div>
+                </div>
+                <div class="quick-call">
+                    <h2>Быстрый вызов</h2>
+                    <div class="emergency-buttons">
+                        <button class="emergency-btn" onclick="emergencyCall('Аварийная', '112')">
+                            <i class="fas fa-exclamation-triangle"></i> 112
+                        </button>
+                        <button class="emergency-btn" onclick="emergencyCall('Диспетчер', '+74951234567')">
+                            <i class="fas fa-phone"></i> Диспетчер
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="profile-section">
+                <div class="section-header">
+                    <h1>Профиль</h1>
+                </div>
+                <div class="profile-card">
+                    <div class="profile-avatar"><span id="profile-avatar">АВ</span></div>
+                    <div class="profile-info"></div>
+                    <button class="btn-secondary"><i class="fas fa-edit"></i> Изменить</button>
+                </div>
+                <div class="profile-settings">
+                    <h2>Настройки</h2>
+                    <div class="setting-item">
+                        <span>Уведомления</span>
+                        <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                    </div>
+                    <div class="setting-item">
+                        <span>Email-рассылка</span>
+                        <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                    </div>
+                    <div class="setting-item">
+                        <span>SMS-уведомления</span>
+                        <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <div class="modal" id="pass-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Заказ пропуска</h2>
+                    <button class="close-modal" onclick="closePassModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Тип</label>
+                        <select id="pass-type"><option value="guest">Гость</option><option value="car">Автомобиль</option><option value="delivery">Доставка</option></select>
+                    </div>
+                    <div class="form-group"><label>Имя гостя</label><input type="text" id="guest-name" placeholder="Введите имя"></div>
+                    <div class="form-group"><label>Дата</label><input type="date" id="pass-date"></div>
+                    <div class="form-group"><label>Время с</label><input type="time" id="pass-time-start" value="09:00"></div>
+                    <div class="form-group"><label>Время до</label><input type="time" id="pass-time-end" value="18:00"></div>
+                    <button class="btn-primary" onclick="submitPass()">Отправить</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="master-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="master-modal-title">Вызов мастера</h2>
+                    <button class="close-modal" onclick="closeMasterModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group"><label>Описание проблемы</label><textarea id="master-description" rows="4" placeholder="Опишите проблему..."></textarea></div>
+                    <div class="form-group">
+                        <label>Удобное время</label>
+                        <select id="master-time"><option>Как можно скорее</option><option>Сегодня, вечером</option><option>Завтра, утром</option><option>Завтра, днём</option></select>
+                    </div>
+                    <div class="form-group"><label>Телефон</label><input type="tel" id="master-phone" value="+7 (999) 123-45-67"></div>
+                    <button class="btn-primary" onclick="submitMasterRequest()">Вызвать</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="toast" id="toast"><span id="toast-message"></span></div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

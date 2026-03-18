@@ -1,0 +1,41 @@
+﻿# ЖК Домовой - PWA приложение
+
+Папка с файлами готова для загрузки на GitHub Pages.
+
+## Инструкция по загрузке:
+
+1. Зайдите на https://github.com и войдите в аккаунт
+2. Нажмите "+" -> "New repository"
+3. Назовите репозиторий: jk-domovoy
+4. Поставьте галочку "Public"
+5. Нажмите "Create repository"
+
+## Загрузка файлов:
+
+### Способ 1: Через браузер
+Перетащите все файлы из папки "Приложение" в раздел "Upload files"
+
+### Способ 2: Через Git (если установлен)
+`ash
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin https://github.com/ВАШ_НИК/jk-domovoy.git
+git push -u origin main
+`
+
+## Включение GitHub Pages:
+
+1. В репозитории перейдите в Settings
+2. Слева выберите "Pages"
+3. В Source выберите "Deploy from a branch"
+4. В Branch выберите "main" и папку "/ (root)"
+5. Нажмите Save
+
+Через 1-2 минуты сайт будет доступен по адресу:
+https://ВАШ_НИК.github.io/jk-domovoy/
+
+## Установка на телефон:
+Откройте эту ссылку в Chrome (Android) или Safari (iOS)
+и нажмите "Добавить на главный экран"
